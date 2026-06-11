@@ -3,14 +3,22 @@ import { Camera } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 const photos = [
-  { src: "https://images.unsplash.com/photo-1596476792213-b30b2dc0e7c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb21hbnRpYyUyMGNvdXBsZSUyMHN1bnNldCUyMHBvcnRyYWl0fGVufDF8fHx8MTc3NjIzNzU2NXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral", caption: "Sunset pertama kita bersama" },
-  { src: "https://images.unsplash.com/photo-1671116810355-2498212d1e13?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VwbGUlMjBoYXBweSUyMGRhdGUlMjByZXN0YXVyYW50fGVufDF8fHx8MTc3NjIzNzU2NXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral", caption: "Dinner date yang tak terlupakan" },
-  { src: "https://images.unsplash.com/photo-1750870799067-3ff68f7468b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VwbGUlMjBiZWFjaCUyMHJvbWFudGljJTIwd2Fsa3xlbnwxfHx8fDE3NzYyMzc1NjZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral", caption: "Jalan-jalan di pantai" },
-  { src: "https://images.unsplash.com/photo-1630276740239-5d9c23d49531?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VwbGUlMjBsYXVnaGluZyUyMHBpY25pYyUyMHBhcmt8ZW58MXx8fHwxNzc2MjM3NTY2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral", caption: "Piknik di taman favorit" },
-  { src: "https://images.unsplash.com/photo-1775204606627-95941b1f33f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VwbGUlMjB0cmF2ZWwlMjBhZHZlbnR1cmUlMjBtb3VudGFpbnxlbnwxfHx8fDE3NzYyMzc1Njd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral", caption: "Petualangan kita ke gunung" },
-  { src: "https://images.unsplash.com/photo-1758522490155-b338da47f09f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VwbGUlMjBjb3p5JTIwY29mZmVlJTIwbW9ybmluZ3xlbnwxfHx8fDE3NzYyMzc1Njd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral", caption: "Pagi yang hangat bersama kopi" },
-  { src: "https://images.unsplash.com/photo-1775653618766-aac60cfb08ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VwbGUlMjBkYW5jaW5nJTIwbmlnaHQlMjByb21hbnRpY3xlbnwxfHx8fDE3NzYyMzc1Njh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral", caption: "Dansa di malam hari" },
-  { src: "https://images.unsplash.com/photo-1770582071210-dad5c6cf1c27?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3VwbGUlMjBnYXJkZW4lMjBmbG93ZXJzJTIwcm9tYW50aWN8ZW58MXx8fHwxNzc2MjM3NTY4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral", caption: "Di taman bunga bersama" },
+  { src: "/images/1.jpeg" },
+  { src: "/images/2.jpeg" },
+  { src: "/images/3.jpeg" },
+  { src: "/images/4.jpeg" },
+  { src: "/images/5.jpeg" },
+  { src: "/images/6.jpeg" },
+  { src: "/images/7.jpeg" },
+  { src: "/images/8.jpeg" },
+  { src: "/images/9.jpeg" },
+  { src: "/images/10.jpeg" },
+  { src: "/images/11.jpeg" },
+  { src: "/images/12.jpeg" },
+  { src: "/images/13.jpeg" },
+  { src: "/images/14.jpeg" },
+  { src: "/images/15.jpeg" },
+  { src: "/images/16.jpeg" },
 ];
 
 export function GallerySection() {

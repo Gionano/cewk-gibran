@@ -38,7 +38,7 @@ export function HeroSection() {
           className="font-['Dancing_Script'] text-[#4A3728] mb-4"
           style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", lineHeight: 1.2 }}
         >
-          Selamat Ulang Tahun yang ke-24,
+          Selamat Ulang Tahun yang ke-18,
           <br />
           <span className="text-[#E8A0BF]">Annisa Zahra!</span>
         </motion.h1>

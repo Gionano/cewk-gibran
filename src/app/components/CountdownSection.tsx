@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Cake, Heart, Gift } from "lucide-react";
 
-const TARGET_DATE = new Date("2026-06-28T00:00:00");
+const TARGET_DATE = new Date("2026-06-02T00:00:00");
 
 function getTimeLeft() {
   const now = new Date();
@@ -16,7 +16,7 @@ function getTimeLeft() {
   };
 }
 
-export function CountdownPage({ onOpen }: { onOpen: () => void }) {
+export function CountdownPage({ onShowCake }: { onShowCake: () => void }) {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft);
   const isReady = timeLeft === null;
 
@@ -109,7 +109,7 @@ export function CountdownPage({ onOpen }: { onOpen: () => void }) {
           transition={{ delay: 0.7, type: "spring" }}
           whileHover={{ scale: 1.07 }}
           whileTap={{ scale: 0.95 }}
-          onClick={onOpen}
+          onClick={onShowCake}
           className="bg-[#E8A0BF] text-white px-10 py-4 rounded-full shadow-lg hover:shadow-xl transition-shadow font-['Playfair_Display'] tracking-wide flex items-center gap-3 mb-12"
           style={{ fontSize: "1.1rem" }}
         >
@@ -134,13 +134,19 @@ export function CountdownPage({ onOpen }: { onOpen: () => void }) {
   );
 }
 
+export type AppPhase = "countdown" | "cake" | "unlocked";
+
 export function useIsUnlocked() {
-  const [unlocked, setUnlocked] = useState(false);
+  const [phase, setPhase] = useState<AppPhase>("countdown");
   const timeReached = new Date() >= TARGET_DATE;
 
-  const open = () => {
-    if (timeReached) setUnlocked(true);
+  const showCake = () => {
+    if (timeReached) setPhase("cake");
   };
 
-  return { unlocked, timeReached, open };
+  const open = () => {
+    setPhase("unlocked");
+  };
+
+  return { phase, timeReached, showCake, open };
 }

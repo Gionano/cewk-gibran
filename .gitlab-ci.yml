@@ -1,0 +1,17 @@
+stages:
+  - deploy
+
+deploy_ke_server:
+  stage: deploy
+  tags:
+    - docker-deploy # Harus sama dengan tag yang didaftarkan tadi
+  script:
+    - echo "Memulai proses otomatisasi deployment..."
+    # Karena kita pakai Shell Executor, runner akan bekerja di direktori /home/gitlab-runner/builds/...
+    # Kita langsung eksekusi Docker Compose dari folder tersebut
+    - docker compose down
+    - docker compose up -d --build
+    - docker image prune -f # Membersihkan sisa image lama agar RAM dan Storage tidak penuh
+    - echo "Deployment ke Docker berhasil!"
+  only:
+    - main # Pipeline ini hanya berjalan kalau kamu nge-push ke branch 'main'

@@ -1,17 +1,19 @@
 import { useEffect, useRef } from "react";
 import confetti from "canvas-confetti";
 import { Heart } from "lucide-react";
+import { AnimatePresence } from "motion/react";
 import { FloatingElements } from "./components/FloatingElements";
 import { HeroSection } from "./components/HeroSection";
 import { CountdownPage, useIsUnlocked } from "./components/CountdownSection";
 import { GallerySection } from "./components/GallerySection";
-import { LoveLetterSection } from "./components/LoveLetterSection";
+import { MusicVoucherSection } from "./components/MusicVoucherSection";
+import { BirthdayCake } from "./components/BirthdayCake";
 
 function Navbar() {
   const links = [
     { label: "Beranda", href: "#" },
     { label: "Kenangan", href: "#kenangan" },
-    { label: "Surat", href: "#surat" },
+    { label: "Hadiah", href: "#hadiah" },
   ];
 
   return (
@@ -55,14 +57,14 @@ function Footer() {
 }
 
 export default function App() {
-  const { unlocked, open } = useIsUnlocked();
+  const { phase, showCake, open } = useIsUnlocked();
   const hasConfetti = useRef(false);
 
   useEffect(() => {
-    if (!unlocked) return;
+    if (phase !== "unlocked") return;
     if (hasConfetti.current) return;
     hasConfetti.current = true;
-    // Burst confetti on load
+    // Burst confetti on unlock
     const end = Date.now() + 2000;
     const colors = ["#E8A0BF", "#D4AF37", "#FFD1DC", "#FAEBD7", "#F5D0C5"];
     (function frame() {
@@ -82,25 +84,30 @@ export default function App() {
       });
       if (Date.now() < end) requestAnimationFrame(frame);
     })();
-  }, [unlocked]);
-
-  if (!unlocked) {
-    return (
-      <div className="min-h-screen bg-[#FFF9F5]" style={{ fontFamily: "'Lora', serif" }}>
-        <FloatingElements />
-        <CountdownPage onOpen={open} />
-      </div>
-    );
-  }
+  }, [phase]);
 
   return (
-    <div className="min-h-screen bg-[#FFF9F5] overflow-x-hidden" style={{ fontFamily: "'Lora', serif" }}>
+    <div className="min-h-screen bg-[#FFF9F5]" style={{ fontFamily: "'Lora', serif" }}>
       <FloatingElements />
-      <Navbar />
-      <HeroSection />
-      <GallerySection />
-      <LoveLetterSection />
-      <Footer />
+      <AnimatePresence mode="wait">
+        {phase === "countdown" && (
+          <CountdownPage key="countdown" onShowCake={showCake} />
+        )}
+
+        {phase === "cake" && (
+          <BirthdayCake key="cake" onAllCandlesBlownOut={open} />
+        )}
+
+        {phase === "unlocked" && (
+          <div key="main" className="min-h-screen bg-[#FFF9F5] overflow-x-hidden">
+            <Navbar />
+            <HeroSection />
+            <GallerySection />
+            <MusicVoucherSection />
+            <Footer />
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
