@@ -5,14 +5,14 @@ import { AnimatePresence } from "motion/react";
 import { FloatingElements } from "./components/FloatingElements";
 import { HeroSection } from "./components/HeroSection";
 import { CountdownPage, useIsUnlocked } from "./components/CountdownSection";
-import { GallerySection } from "./components/GallerySection";
+import { LoveLetterSection } from "./components/LoveLetterSection";
 import { MusicVoucherSection } from "./components/MusicVoucherSection";
 import { BirthdayCake } from "./components/BirthdayCake";
 
 function Navbar() {
   const links = [
     { label: "Beranda", href: "#" },
-    { label: "Kenangan", href: "#kenangan" },
+    { label: "Surat", href: "#surat" },
     { label: "Hadiah", href: "#hadiah" },
   ];
 
@@ -102,7 +102,7 @@ export default function App() {
           <div key="main" className="min-h-screen bg-[#FFF9F5] overflow-x-hidden">
             <Navbar />
             <HeroSection />
-            <GallerySection />
+            <LoveLetterSection />
             <MusicVoucherSection />
             <Footer />
           </div>

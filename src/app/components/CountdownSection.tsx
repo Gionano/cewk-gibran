@@ -2,11 +2,54 @@ import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Cake, Heart, Gift } from "lucide-react";
 
-const TARGET_DATE = new Date("2026-06-02T00:00:00");
+// ── CONFIGURATION: Ganti Tanggal Ulang Tahun di Sini ──
+const BIRTHDAY_MONTH = 9;  // 1 = Januari, 2 = Februari, ..., 6 = Juni, dll.
+const BIRTHDAY_DAY = 14;   // Tanggal ulang tahun
 
-function getTimeLeft() {
+const MONTH_NAMES = [
+  "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+  "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+];
+
+function getBirthdayDates() {
   const now = new Date();
-  const diff = TARGET_DATE.getTime() - now.getTime();
+  const currentYear = now.getFullYear();
+  const monthIndex = BIRTHDAY_MONTH - 1;
+
+  // Tanggal ulang tahun tahun ini
+  const birthdayThisYear = new Date(currentYear, monthIndex, BIRTHDAY_DAY, 0, 0, 0);
+  
+  // Tanggal berakhir (lewat sehari)
+  const birthdayEndThisYear = new Date(birthdayThisYear);
+  birthdayEndThisYear.setDate(birthdayEndThisYear.getDate() + 1);
+
+  let targetDate: Date;
+  let isPassed = false;
+  let canOpen = false;
+
+  if (now < birthdayThisYear) {
+    // Sebelum ulang tahun tahun ini
+    targetDate = birthdayThisYear;
+    isPassed = false;
+    canOpen = false;
+  } else if (now >= birthdayThisYear && now < birthdayEndThisYear) {
+    // Sedang berulang tahun hari ini
+    targetDate = birthdayThisYear;
+    isPassed = false;
+    canOpen = true;
+  } else {
+    // Sudah lewat sehari atau lebih
+    targetDate = new Date(currentYear + 1, monthIndex, BIRTHDAY_DAY, 0, 0, 0);
+    isPassed = true;
+    canOpen = false;
+  }
+
+  return { targetDate, isPassed, canOpen };
+}
+
+function getTimeLeft(targetDate: Date) {
+  const now = new Date();
+  const diff = targetDate.getTime() - now.getTime();
   if (diff <= 0) return null;
   return {
     hari: Math.floor(diff / (1000 * 60 * 60 * 24)),
@@ -17,12 +60,17 @@ function getTimeLeft() {
 }
 
 export function CountdownPage({ onShowCake }: { onShowCake: () => void }) {
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft);
+  const [dates, setDates] = useState(getBirthdayDates);
+  const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(dates.targetDate));
   const isReady = timeLeft === null;
 
   useEffect(() => {
     if (isReady) return;
-    const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
+    const timer = setInterval(() => {
+      const d = getBirthdayDates();
+      setDates(d);
+      setTimeLeft(getTimeLeft(d.targetDate));
+    }, 1000);
     return () => clearInterval(timer);
   }, [isReady]);
 
@@ -54,6 +102,12 @@ export function CountdownPage({ onShowCake }: { onShowCake: () => void }) {
             <br />
             <span className="text-[#E8A0BF]">Annisa Zahra!</span>
           </>
+        ) : dates.isPassed ? (
+          <>
+            Yah, Ulang Tahunmu
+            <br />
+            <span className="text-[#E8A0BF]">Sudah Lewat...</span>
+          </>
         ) : (
           <>
             Ada Sesuatu yang Spesial
@@ -67,12 +121,14 @@ export function CountdownPage({ onShowCake }: { onShowCake: () => void }) {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="font-['Lora'] text-[#8B7165] italic text-center mb-10"
+        className="font-['Lora'] text-[#8B7165] italic text-center mb-10 px-4 max-w-md"
         style={{ fontSize: "clamp(0.95rem, 2vw, 1.15rem)" }}
       >
         {isReady
           ? "Ada kejutan spesial yang menunggumu di dalam..."
-          : "Kejutannya akan terbuka pada 28 Juni 2026..."}
+          : dates.isPassed
+          ? "Yah, ulang tahunmu tahun ini sudah lewat. Kejutannya sudah dikunci kembali... Sampai jumpa tahun depan! ❤️"
+          : `Kejutannya akan terbuka pada ${BIRTHDAY_DAY} ${MONTH_NAMES[BIRTHDAY_MONTH - 1]} ${dates.targetDate.getFullYear()}...`}
       </motion.p>
 
       {timeLeft ? (
@@ -138,15 +194,15 @@ export type AppPhase = "countdown" | "cake" | "unlocked";
 
 export function useIsUnlocked() {
   const [phase, setPhase] = useState<AppPhase>("countdown");
-  const timeReached = new Date() >= TARGET_DATE;
+  const { canOpen } = getBirthdayDates();
 
   const showCake = () => {
-    if (timeReached) setPhase("cake");
+    if (canOpen) setPhase("cake");
   };
 
   const open = () => {
     setPhase("unlocked");
   };
 
-  return { phase, timeReached, showCake, open };
+  return { phase, timeReached: canOpen, showCake, open };
 }

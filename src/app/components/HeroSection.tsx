@@ -5,8 +5,8 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 const heroImage = "/images/background-foto.jpeg";
 
 export function HeroSection() {
-  const scrollToGallery = () => {
-    document.getElementById("kenangan")?.scrollIntoView({ behavior: "smooth" });
+  const scrollToLetter = () => {
+    document.getElementById("surat")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -59,10 +59,10 @@ export function HeroSection() {
           transition={{ duration: 1, delay: 0.9 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={scrollToGallery}
+          onClick={scrollToLetter}
           className="bg-[#E8A0BF] text-white px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-shadow font-['Playfair_Display'] tracking-wide"
         >
-          Lihat Kenangan Kita
+          Baca Surat Untukmu
         </motion.button>
 
         <motion.div

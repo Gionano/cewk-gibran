@@ -30,7 +30,7 @@ const tapes: TapeData[] = [
   {
     id: 2,
     title: "Jatuh Suka",
-    spotifyId: "4jVnLgT7Lp7Kj6x2G1hV2v",
+    spotifyId: "6PqWdGIYq5xdLaa4zCZfRp",
     color: "#D4AF37",
     labelColor: "#FFF9F5",
     voucherTitle: "Kupon Jalan Malam",
@@ -40,7 +40,7 @@ const tapes: TapeData[] = [
   {
     id: 3,
     title: "Sewindu",
-    spotifyId: "6g1aR0Oa1G7k5m7K3n5n5N",
+    spotifyId: "0nXXgjpcisM0bheuDZHAub",
     color: "#F5D0C5",
     labelColor: "#4A3728",
     voucherTitle: "Kupon Peluk Gratis",
@@ -50,7 +50,7 @@ const tapes: TapeData[] = [
   {
     id: 4,
     title: "Love Me Harder",
-    spotifyId: "4P5q8E7yO2tHn1WzTz5d6t",
+    spotifyId: "5J4ZkQpzMUFojo1CtAZYpn",
     color: "#C4A898",
     labelColor: "#FFF9F5",
     voucherTitle: "Kupon Film Date",
@@ -60,7 +60,7 @@ const tapes: TapeData[] = [
   {
     id: 5,
     title: "Brooklyn Baby",
-    spotifyId: "1PHThQxLg99S8g7wG9q93T",
+    spotifyId: "1NZs6n6hl8UuMaX0UC0YTz",
     color: "#8B7165",
     labelColor: "#FFF9F5",
     voucherTitle: "Kupon Bebas Pilih",
